@@ -17,13 +17,13 @@ dotenv.config()
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:4200',
+    origin: `${process.env.CLIENT_ADDRESS}`,
     credentials: true
 }))
 
 const store = new (MongoDBStore(session))({
-    uri: "mongodb+srv://romain:ovMDorESVPYbOwHZ@l-oiseau-vert.ccevog6.mongodb.net/?retryWrites=true&w=majority",
-    collection: 'mySessions'
+    uri: `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_ADDRESS}/?retryWrites=true&w=majority`,
+    collection: `${process.env.MONGO_SESSION_COLLECTION}`
 });
 
 app.use(session({
