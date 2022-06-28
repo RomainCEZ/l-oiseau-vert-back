@@ -62,7 +62,7 @@ app.use((req, res, next) => {
 app.use('/', express.static(join(__dirname, '..', './client/dist')));
 app.use('/login', express.static(join(__dirname, '..', './client/dist')));
 app.use('/register', express.static(join(__dirname, '..', './client/dist')));
-app.use('/posts/*', express.static(join(__dirname, '..', './client/dist')));
+app.use('/post/*', express.static(join(__dirname, '..', './client/dist')));
 app.use("/api/posts", postsRoutes);
 app.use('/api/auth', usersRoutes);
 
