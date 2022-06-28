@@ -11,16 +11,16 @@ class InMemoryPostsRepository implements PostsRepository {
             authorId: "uuid",
             author: "Me",
             content: "Ceci est un post !",
-            creationDate: 1656190787175,
+            timestamp: 1656190787175,
             comments: []
         }];
     }
     async getPosts() {
-        return [...this.posts.sort((a, b) => b.creationDate - a.creationDate).slice(0, 10)];
+        return [...this.posts.sort((a, b) => b.timestamp - a.timestamp).slice(0, 10)];
     }
 
     async getNextTenPosts(date: number): Promise<Post[]> {
-        const nextPosts = [...this.posts.filter(post => post.creationDate < date)]
+        const nextPosts = [...this.posts.filter(post => post.timestamp < date)]
         return nextPosts.length > 10 ? nextPosts.slice(0, 10) : nextPosts
     }
     async getPostById(postId: string) {

@@ -6,14 +6,14 @@ export default class Comment {
     content: string
     authorId: string
     author: string
-    creationDate: number
+    timestamp: number
 
-    constructor({ id, content, authorId, author, creationDate }: IComment) {
+    constructor({ id, content, authorId, author, timestamp }: IComment) {
         this.id = id || uuidv4()
         this.content = content
         this.authorId = authorId
         this.author = author
-        this.creationDate = creationDate || Date.now()
+        this.timestamp = timestamp || Date.now()
     }
 
 }

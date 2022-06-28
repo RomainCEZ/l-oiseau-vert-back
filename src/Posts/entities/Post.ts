@@ -6,15 +6,15 @@ export default class Post {
     authorId: string;
     author: string;
     content: string;
-    creationDate: number;
+    timestamp: number;
     comments: Comment[];
 
-    constructor({ id, authorId, author, content, creationDate, comments }: IPost) {
+    constructor({ id, authorId, author, content, timestamp, comments }: IPost) {
         this.id = id || uuidv4()
         this.authorId = authorId
         this.author = author;
         this.content = content;
-        this.creationDate = creationDate || Date.now();
+        this.timestamp = timestamp || Date.now();
         this.comments = comments || []
     }
 }
