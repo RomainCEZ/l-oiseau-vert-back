@@ -5,8 +5,9 @@
   "main": "server.ts",
   "scripts": {
     "build": "tsc",
-    "start": "tsc & node dist/server",
-    "dev": "tsc -w & nodemon dist/server"
+    "start": "node dist/server",
+    "dev": "tsc -w & nodemon dist/server",
+    "heroku-postbuild": "cd back && npm install && npm run build && cd ../front && npm install && ng build"  
   },
   "author": "",
   "license": "ISC",
