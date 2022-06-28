@@ -1,17 +1,16 @@
 import { NextFunction, Request, Response } from "express";
 import Email from "./entities/Email";
 import UserPassword from "./entities/UserPassword";
-import UsersService from "./Users.service";
+import usersService from "./Users.service";
 
-const usersService = UsersService
 
 class UsersController {
-    constructor(private usersService: typeof UsersService) { }
+    constructor() { }
 
     async register(req: Request, res: Response, next: NextFunction) {
         try {
-            await this.usersService.createUser({
-                email: new Email(req.body.email).value,
+            await usersService.createUser({
+                email: Email.create(req.body.email).value,
                 password: await UserPassword.create(req.body.password).hashPassword(),
                 username: req.body.username
             });
@@ -47,4 +46,4 @@ class UsersController {
     }
 }
 
-export default new UsersController(usersService)
+export default new UsersController()
