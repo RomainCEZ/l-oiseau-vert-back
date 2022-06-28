@@ -33,6 +33,8 @@ app.use(session({
     resave: false,
     cookie: {
         httpOnly: true,
+        sameSite: "none",
+        secure: true,
         maxAge: 24 * 60 * 60 * 1000, // 24h
     },
 }))
@@ -42,7 +44,9 @@ passport.use(new LocalStrategy.Strategy({ usernameField: 'email' }, LocalAuth.au
 
 passport.serializeUser(LocalAuth.serializeUser)
 passport.deserializeUser(LocalAuth.deserializeUser)
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: false,
+}));
 
 app.use((req, res, next) => {
     res.setHeader(
