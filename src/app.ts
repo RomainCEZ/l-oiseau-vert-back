@@ -11,6 +11,7 @@ import { router as postsRoutes } from "./Posts/Posts.routes"
 import { router as usersRoutes } from "./Users/Users.routes"
 import LocalAuth from "./common/localAuth";
 import MongoDBStore from "connect-mongodb-session";
+import { join } from "path";
 
 dotenv.config()
 
@@ -60,6 +61,7 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(express.static(join(__dirname, '..', './client/dist')));
 app.use("/api/posts", postsRoutes);
 app.use('/api/auth', usersRoutes);
 
