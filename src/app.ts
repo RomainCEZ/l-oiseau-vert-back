@@ -12,6 +12,7 @@ import { router as usersRoutes } from "./Users/Users.routes"
 import LocalAuth from "./common/localAuth";
 import MongoDBStore from "connect-mongodb-session";
 import { join } from "path";
+import mongoose from "mongoose";
 
 dotenv.config()
 
@@ -21,6 +22,11 @@ app.use(cors({
     origin: `${process.env.CLIENT_ADDRESS}`,
     credentials: true
 }))
+
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_ADDRESS}/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`)
+    .then(() => console.log('Connected to MongoDB !'))
+    .catch(() => console.log('Could not Connect to MongoDB !'));
+
 
 const store = new (MongoDBStore(session))({
     uri: `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_ADDRESS}/?retryWrites=true&w=majority`,
