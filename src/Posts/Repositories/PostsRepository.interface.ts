@@ -10,7 +10,7 @@ export default interface PostsRepository {
 
     savePost(newPost: Post): Promise<void>
 
-    updatePost(post: Partial<IPost>): Promise<void>
+    updatePost(id: string, content: string): Promise<void>
 
     deletePost(postId: string): Promise<void>
 }
