@@ -3,6 +3,6 @@ export default interface IPost {
     authorId: string;
     author: string;
     content: string;
-    creationDate: number;
+    timestamp: number;
     comments: Comment[];
 }
