@@ -3,5 +3,5 @@ export default interface IComment {
     content: string
     authorId: string
     author: string
-    creationDate: number
+    timestamp: number
 }
