@@ -33,9 +33,10 @@ class InMemoryPostsRepository implements PostsRepository {
     async savePost(newPost: Post) {
         this.posts.push(newPost);
     }
-    async updatePost(post: Post) {
-        this.deletePost(post.id);
-        this.posts.push(post);
+    async updatePost(id: string, content: string) {
+        const post = await this.getPostById(id);
+        await this.deletePost(id)
+        this.posts.push({ ...post, content: content });
     }
     async deletePost(postId: string) {
         this.posts = this.posts.filter((post) => post.id !== postId);
