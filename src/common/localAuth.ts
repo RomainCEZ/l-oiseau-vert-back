@@ -14,10 +14,14 @@ export default class LocalAuth {
     }
 
     static isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
-        if (req.isAuthenticated()) {
-            next()
-        } else {
-            throw new HttpException(401, "Not authorized")
+        try {
+            if (req.isAuthenticated()) {
+                next()
+            } else {
+                throw new HttpException(401, "Not authorized")
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -26,7 +30,11 @@ export default class LocalAuth {
     }
 
     static deserializeUser = async (serializedUser: any, done: any) => {
-        const user = await usersService.getUserById(serializedUser.id)
-        done(null, { userId: user.id, username: user.username })
+        try {
+            const user = await usersService.getUserById(serializedUser.id)
+            done(null, { userId: user.id, username: user.username })
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
