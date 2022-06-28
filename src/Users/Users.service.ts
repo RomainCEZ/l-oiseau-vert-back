@@ -2,10 +2,10 @@ import HttpException from "../common/HttpException";
 import Email from "./entities/Email";
 import User from "./entities/User";
 import UserPassword from "./entities/UserPassword";
-import InMemoryUsersRepository from "./Repositories/InMemoryUsersRepository";
+import MongoDBUsersAdapter from "./Repositories/mongoDB/Users.adapter";
 import IUsersRepository from "./Repositories/UsersRepository.interface";
 
-const usersRepository = new InMemoryUsersRepository()
+const usersRepository = new MongoDBUsersAdapter()
 
 class UsersService {
     usersRepository
@@ -37,7 +37,7 @@ class UsersService {
         await this.usersRepository.saveUser(newUser);
     }
     async createLoginSession({ email, password }: { email: string, password: string }) {
-        const user = await this.getUserByEmail(new Email(email).value);
+        const user = await this.getUserByEmail(Email.create(email).value);
         await this.verifyPassword(UserPassword.create(password), user.password);
         return {
             userId: user.id,
