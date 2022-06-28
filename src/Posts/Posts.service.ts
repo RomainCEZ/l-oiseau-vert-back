@@ -27,10 +27,8 @@ class PostsService {
     public async createPost(post: Post): Promise<void> {
         await this.postsRepository.savePost(post);
     }
-    public async updatePost(updatedPostParams: IPost): Promise<void> {
-        const oldPost = await this.getPostById(updatedPostParams.id);
-        const updatedPost = oldPost // TEMP
-        await this.postsRepository.updatePost(updatedPost);
+    public async updatePost(postId: string, content: string): Promise<void> {
+        await this.postsRepository.updatePost(postId, content);
     }
 
     public async deletePost(postId: string): Promise<void> {
