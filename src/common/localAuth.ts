@@ -8,8 +8,8 @@ export default class LocalAuth {
         try {
             const user = await usersService.createLoginSession({ email, password })
             return done(null, { id: user.userId, username: user.username })
-        } catch (err) {
-            console.log(err)
+        } catch (error) {
+            return done(null, null)
         }
     }
 
@@ -21,7 +21,7 @@ export default class LocalAuth {
                 throw new HttpException(401, "Not authorized")
             }
         } catch (error) {
-            console.log(error)
+            throw new HttpException(401, "Not authorized")
         }
     }
 
@@ -34,7 +34,7 @@ export default class LocalAuth {
             const user = await usersService.getUserById(serializedUser.id)
             done(null, { userId: user.id, username: user.username })
         } catch (error) {
-            console.log(error)
+            throw new HttpException(401, "Not authorized")
         }
     }
 }
