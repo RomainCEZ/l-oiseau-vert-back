@@ -62,7 +62,7 @@ class PostsController {
             if (req.user.userId !== post.authorId) {
                 throw new HttpException(403, 'Unauthorized request !')
             }
-            await postsService.updatePost(req.params.id.toString(), req.body.content.toString());
+            await postsService.updatePost(req.params.id, req.body.content.toString());
 
             res.status(200).json({ message: 'Post updated !' });
         } catch (error) {
