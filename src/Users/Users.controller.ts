@@ -37,9 +37,9 @@ class UsersController {
 
     async logout(req: Request, res: Response, next: NextFunction) {
         try {
-            console.log('logout')
-            req.logout(err => { });
-            res.status(200).json('Successfully logout !')
+            req.logout(err => {
+                res.status(200).json('Successfully logged out !')
+            });
         } catch (error) {
             next(error)
         }
