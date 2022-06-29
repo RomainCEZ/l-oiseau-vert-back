@@ -45,7 +45,11 @@ export default class MongoDBUsersAdapter implements IUsersRepository {
             await user.save();
 
         } catch (error) {
-            console.log(error)
+            // @ts-ignore
+            if (error.errors.email) throw new HttpException(409, 'Email already registered')
+            // @ts-ignore
+            if (error.errors.username) throw new HttpException(409, 'Username already registered')
+            throw new HttpException(500, 'Database error')
         }
     }
 
